@@ -32,7 +32,7 @@ class UserLoginController extends Controller
         // Próba zalogowania użytkownika
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             // Jeśli logowanie powiodło się, przekieruj na stronę domową (lub inną)
-            return redirect()->intended('dashboard'); // lub inna ścieżka np. '/note'
+            return redirect()->intended('/note'); // lub inna ścieżka np. '/note'
         }
 
         // Jeśli logowanie się nie powiodło, zwróć odpowiedni błąd
