@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\UserRegisterController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 Route::redirect('/', '/login', 301);
 
@@ -13,6 +13,11 @@ Route::redirect('/login', '/login')->name('login');
 Route::get('/login', [UserLoginController::class, 'show'])->name('login.show');
 Route::post('/login', [UserLoginController::class, 'login'])->name('login.login');
 
+Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])
+    ->name('password.request');
+
+Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])
+    ->name('password.email');
 
 Route::get('/register', [UserRegisterController::class, 'show'])->name('register.show');
 Route::post('/register', [UserRegisterController::class, 'register'])->name('register.register');

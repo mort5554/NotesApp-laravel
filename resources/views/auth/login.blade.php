@@ -26,10 +26,10 @@
         @endif
 
         @session('message')
-                <div class="alert alert-info m-3 text-center" role="alert">
-                    {{ session('message') }}
-                </div>
-            @endsession
+            <div class="alert alert-info m-3 text-center" role="alert">
+                {{ session('message') }}
+            </div>
+        @endsession
 
         <form action="{{ route('login.login')}}" method="post">
             @csrf
@@ -46,9 +46,9 @@
                     <i class="fa fa-lock" aria-hidden="true"></i>
                     <label>Hasło</label>
            </div>
-           <!--<div class="forgot-pass">
-              <a href="#">Zapomniałeś hasła?</a>
-           </div>-->
+           <div class="forgot-pass">
+              <a href="{{ route('password.request')}}">Zapomniałeś hasła?</a>
+           </div>
            <button type="submit">Zaloguj się</button>
            <div class="sign-up">
               Nie masz konta?
