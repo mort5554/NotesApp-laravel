@@ -46,9 +46,7 @@
                     <i class="fa fa-lock" aria-hidden="true"></i>
                     <label>Hasło</label>
            </div>
-           <div class="forgot-pass">
-              <a href="{{ route('password.request')}}">Zapomniałeś hasła?</a>
-           </div>
+
            <button type="submit">Zaloguj się</button>
            <div class="sign-up">
               Nie masz konta?

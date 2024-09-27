@@ -8,7 +8,7 @@
     @vite(['resources/css/app.css', 'resources/css/note.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     @livewireStyles
-    <title>@yield('document_title', 'NotesApp')</title>
+    <title>@yield('title', 'NotesApp')</title>
 </head>
 <body>
 

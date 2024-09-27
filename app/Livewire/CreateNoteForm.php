@@ -38,6 +38,6 @@ class CreateNoteForm extends Component
 
     public function render()
     {
-        return view('livewire.create-note-form');
+        return view('livewire.note.create-note-form');
     }
 }
