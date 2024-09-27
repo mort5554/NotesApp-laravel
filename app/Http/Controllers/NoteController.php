@@ -31,7 +31,7 @@ class NoteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    /*public function store(Request $request)
     {
         $validateData = $request->validate([
             'title' => 'required|string|max:20|min:3',
@@ -43,7 +43,7 @@ class NoteController extends Controller
         $note = Note::create($validateData);
 
         return to_route('note.index', $note)->with('message', 'Udało się utworzyć notatkę');
-    }
+    }*/
 
     /**
      * Display the specified resource.
