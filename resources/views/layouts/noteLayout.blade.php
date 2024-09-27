@@ -13,7 +13,8 @@
 <body>
 
     <main class="background-gradient">
-        @include('layouts.nav')
+        @livewire('navigation')
+
         @yield('content')
     </main>
 

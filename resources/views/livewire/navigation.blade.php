@@ -1,4 +1,3 @@
-
 <nav class="row navigation">
     <div class="left-side">
         <a href="{{ route('note.index') }}">Twoje Notatki</a>
