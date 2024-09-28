@@ -14,7 +14,7 @@ Route::redirect('/', '/login', 301);
 
 
 // Obsługa logowania
-Route::get('/login', [UserLoginController::class, 'show'])->name('login.show');
+Route::get('/login', [UserLoginController::class, 'show'])->name('login');
 Route::post('/login', [UserLoginController::class, 'login'])->name('login.login');
 
 

@@ -49,7 +49,7 @@
            <button type="submit">Zarejestruj się</button>
            <div class="sign-up">
               Masz konto?
-              <a href="{{ route('login.show') }}">Zaloguj się się</a>
+              <a href="{{ route('login') }}">Zaloguj się się</a>
            </div>
         </form>
     </div>
