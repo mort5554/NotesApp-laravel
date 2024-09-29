@@ -49,10 +49,10 @@ class NoteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(Note $note)
     {
 
-        return view('note.show');
+        return view('note.show', ['note' => $note]);
     }
 
     /**
@@ -60,9 +60,7 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-        if($note->user_id !== request()->user()->id){
-            abort(403);
-        }
+
         return view('note.edit', ['note' => $note]);
     }
 

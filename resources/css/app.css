@@ -11,6 +11,15 @@
     background: rgb(65,78,80);
     background: radial-gradient(circle, rgba(65,78,80,1) 0%, rgba(185,185,186,1) 50%, rgba(0,0,0,1) 100%);
 }
+#registerContainer{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(65,78,80);
+    background: radial-gradient(circle, rgba(65,78,80,1) 0%, rgba(185,185,186,1) 50%, rgba(0,0,0,1) 100%);
+}
 .content{
     width: 390px;
     padding: 40px 30px;

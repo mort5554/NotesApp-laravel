@@ -1,8 +1,6 @@
 @extends('layouts.layout')
 
-
 @section('document_title', 'Login')
-
 
 @section('content')
 

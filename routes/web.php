@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Livewire\ShowNoteForm;
 use App\Livewire\NoteList;
+use App\Livewire\CreateNoteForm;
 
 // Przekierowanie z głównej strony na login
 Route::redirect('/', '/login', 301);
@@ -48,8 +49,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('note', NoteController::class);
 
     //Route::get('note', NoteList::class)->name('note.index');
-
-    //Route::get('/note/{id}', ShowNoteForm::class)->name('note.show');
 
     // Trasa do tworzenia notatki za pomocą Livewire (przesłania standardową metodę create)
     //Route::get('note/create', NoteController::class, )->name('note.create');

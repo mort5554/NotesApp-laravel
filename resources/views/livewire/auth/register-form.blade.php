@@ -1,7 +1,7 @@
-<section id="registerContainer">
+<section id="loginContainer">
     <div class="content">
         <div class="text">
-           Logowanie
+            Rejestracja
         </div>
 
         @if ($errors->any())
@@ -14,13 +14,13 @@
             </div>
         @endif
 
-        @if (session('message'))
-            <div class="alert alert-info m-3 text-center" role="alert">
-                {{ session('message') }}
+        <form wire:submit.prevent="register">
+            <div class="field">
+                <input type="text" wire:model="name" required>
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <label>Nazwa</label>
             </div>
-        @endif
 
-        <form wire:submit.prevent="login">
             <div class="field">
                 <input type="text" wire:model="email" required>
                 <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -33,10 +33,17 @@
                 <label>Hasło</label>
             </div>
 
-            <button type="submit">Zaloguj się</button>
+            <div class="field">
+                <input type="password" wire:model="password_confirmation" required>
+                <i class="fa fa-lock" aria-hidden="true"></i>
+                <label>Powtórz Hasło</label>
+            </div>
+
+            <button type="submit">Zarejestruj się</button>
+
             <div class="sign-up">
-                Nie masz konta?
-                <a href="{{ route('register.show') }}">Zarejestruj się</a>
+                Masz już konto?
+                <a href="{{ route('login') }}">Zaloguj się</a>
             </div>
         </form>
     </div>
