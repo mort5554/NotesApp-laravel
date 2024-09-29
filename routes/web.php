@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
 
     // Ustawienia użytkownika
-    Route::get('/settings', [UserController::class, 'settings'])->name('user.settings');
+    Route::get('/settings', [UserController::class, 'show'])->name('user.settings');
 
 
     // Zmiana hasła i nazwy użytkownika

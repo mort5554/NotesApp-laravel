@@ -15,7 +15,7 @@ class NoteList extends Component
         // Pobieranie notatek w metodzie render
         $notes = Note::query()
             ->where('user_id', request()->user()->id)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('updated_at', 'desc')
             ->paginate(8);
 
         // Zwracanie widoku Livewire z notatkami
