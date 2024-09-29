@@ -60,18 +60,16 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-
         return view('note.edit', ['note' => $note]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Note $note)
+    /*public function update(Request $request, Note $note)
     {
         $validateData = $request->validate([
-            'title' => 'required|string|max:20|min:3',
-            'content' => 'required|string|max:255|min:5'
+
         ]);
         //dd($valideData);
         $validateData['user_id'] = $request->user()->id;
