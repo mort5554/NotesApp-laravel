@@ -51,7 +51,7 @@ class UserSettings extends Component
         $user->save();
 
         session()->flash('message', 'Hasło zostało zmienione pomyślnie.');
-        $this->reset(['current_password', 'new_password', '$new_password_confirmation']);
+        $this->reset(['current_password', 'new_password', 'new_password_confirmation']);
     }
 
     public function render()
