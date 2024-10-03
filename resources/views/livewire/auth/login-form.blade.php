@@ -1,4 +1,4 @@
-<section id="registerContainer">
+<section id="loginContainer">
     <div class="content">
         <div class="text">
            Logowanie
@@ -36,7 +36,7 @@
             <button type="submit">Zaloguj się</button>
             <div class="sign-up">
                 Nie masz konta?
-                <a href="{{ route('register.show') }}">Zarejestruj się</a>
+                <a href="{{ route('register') }}">Zarejestruj się</a>
             </div>
         </form>
     </div>

@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Auth\Events\Registered;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 
+#[Layout('layouts.layout')]
+#[Title('Register')]
 class RegisterForm extends Component
 {
     public $name;

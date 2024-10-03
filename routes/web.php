@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\NoteController;
+use App\Livewire\Auth\LoginForm;
+use App\Livewire\Auth\RegisterForm;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\UserRegisterController;
@@ -15,8 +17,9 @@ Route::redirect('/', '/login', 301);
 
 
 // Obsługa logowania
-Route::get('/login', [UserLoginController::class, 'show'])->name('login');
-Route::post('/login', [UserLoginController::class, 'login'])->name('login.login');
+Route::get('/login', LoginForm::class)->name('login');
+//Route::get('/login', [UserLoginController::class, 'show'])->name('login');
+//Route::post('/login', [UserLoginController::class, 'login'])->name('login.login');
 
 
 // Obsługa resetowania hasła
@@ -27,8 +30,9 @@ Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkE
 
 
 // Obsługa rejestracji
-Route::get('/register', [UserRegisterController::class, 'show'])->name('register.show');
-Route::post('/register', [UserRegisterController::class, 'register'])->name('register.register');
+Route::get('/register', RegisterForm::class)->name('register');
+//Route::get('/register', [UserRegisterController::class, 'show'])->name('register.show');
+//Route::post('/register', [UserRegisterController::class, 'register'])->name('register.register');
 
 
 // Obsługa weryfikacji e-maila

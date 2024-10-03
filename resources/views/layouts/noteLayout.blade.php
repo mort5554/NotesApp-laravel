@@ -8,7 +8,7 @@
     @vite(['resources/css/app.css', 'resources/css/note.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     @livewireStyles
-    <title>@yield('title', 'NotesApp')</title>
+    <title>{{ $title ?? config('app.name', 'NotesApp') }}</title>
 </head>
 <body>
 
@@ -16,6 +16,7 @@
         @livewire('navigation')
 
         @yield('content')
+        <!--{//{ $slot }}-->
     </main>
 
     @livewireScripts

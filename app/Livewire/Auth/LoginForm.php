@@ -2,9 +2,13 @@
 
 namespace App\Livewire\Auth;
 
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
+#[Layout('layouts.layout')]
+#[Title('Login')]
 class LoginForm extends Component
 {
     public $email;
