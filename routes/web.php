@@ -50,9 +50,9 @@ Route::post('/email/verification-notification', [UserRegisterController::class, 
 Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Trasy resource'owe do obsługi notatek
-    Route::resource('note', NoteController::class);
+    Route::resource('note', NoteController::class)->except('index');
 
-    //Route::get('note', NoteList::class)->name('note.index');
+    Route::get('note', NoteList::class)->name('note.index');
 
     // Trasa do tworzenia notatki za pomocą Livewire (przesłania standardową metodę create)
     //Route::get('note/create', NoteController::class, )->name('note.create');

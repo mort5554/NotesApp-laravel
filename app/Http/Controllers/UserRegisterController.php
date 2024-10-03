@@ -3,19 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class UserRegisterController extends Controller
 {
-    public function show(){
-        return view('auth.register');
-    }
-
 
     public function showVerify(){
         return view('auth.verify-email');

@@ -1,4 +1,11 @@
-<div class="row note-container mt-5">
+<div class="row note-container mt-5 p-3">
+
+    @if (session('message'))
+        <div class="alert alert-info m-3 text-center" role="alert">
+            {{ session('message') }}
+        </div>
+    @endif
+
     @foreach ($notes as $note)
         <div class="note m-3 col-sm-6 col-md-4">
             <h2 class="mt-3">{{ $note->title }}</h2>

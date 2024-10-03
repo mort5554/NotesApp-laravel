@@ -15,8 +15,7 @@
     <main class="background-gradient">
         @livewire('navigation')
 
-        @yield('content')
-        <!--{//{ $slot }}-->
+        {{ $slot }}
     </main>
 
     @livewireScripts

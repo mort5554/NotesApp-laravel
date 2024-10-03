@@ -2,10 +2,14 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Note;
 
+#[Layout('layouts.noteLayout')]
+#[Title('Notes')]
 class NoteList extends Component
 {
     use WithPagination;
@@ -19,7 +23,6 @@ class NoteList extends Component
             ->paginate(8);
 
         // Zwracanie widoku Livewire z notatkami
-        return view('livewire.note.note-list', ['notes' => $notes])
-            ->layout('layouts.noteLayout');
+        return view('livewire.note.note-list', ['notes' => $notes]);
     }
 }
