@@ -2,16 +2,20 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use App\Models\Note;
 
+#[Layout('layouts.noteLayout')]
+#[Title('Notes Details')]
 class ShowNoteForm extends Component
 {
 
     public $note;
 
-    public function mount($id){
-        $this->note = Note::findOrFail($id);
+    public function mount($note){
+        $this->note = Note::findOrFail($note);
 
     }
     public function render()

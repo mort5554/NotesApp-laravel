@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('note', NoteList::class)->name('note.index');
 
+    Route::get('/note/{note}', ShowNoteForm::class)->name('note.show');
     // Trasa do tworzenia notatki za pomocą Livewire (przesłania standardową metodę create)
     //Route::get('note/create', NoteController::class, )->name('note.create');
 

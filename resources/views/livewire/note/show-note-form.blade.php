@@ -8,11 +8,12 @@
             </ul>
         </div>
     @endif
-
+    <h1 class="pt-5 text-center">Szczegóły notatki</h1>
     <div class="note mt-5 container">
 
+
         <label for="title" class="mt-3">Tytuł notatki</label>
-        <input type="text" name="title" id="title" class="mb-3" value="{{ $note->title }}" required>
+        <input type="text" name="title" id="title" class="mb-3" value="{{ $note->title }}" disabled>
         <div class="note-body bg-white p-2 text-start" style="border:1px solid black">
             {{ $note->content }}
         </div>
