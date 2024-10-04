@@ -79,10 +79,6 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
-        if($note->user_id !== request()->user()->id){
-            abort(403);
-        }
-        $note->delete();
-        return to_route('note.index')->with('message', 'Udało się usunąć notatkę');
+
     }
 }

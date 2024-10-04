@@ -3,6 +3,7 @@
 use App\Http\Controllers\NoteController;
 use App\Livewire\Auth\LoginForm;
 use App\Livewire\Auth\RegisterForm;
+use App\Livewire\DeleteNote;
 use App\Livewire\EditNoteForm;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserLoginController;
@@ -61,8 +62,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/note/{note}', ShowNoteForm::class)->name('note.show');
 
     Route::get('note/create', CreateNoteForm::class)->name('note.create');
+
     Route::get('note/{note}/edit', EditNoteForm::class)->name('note.edit');
 
+    Route::get('note/{note}/delete', DeleteNote::class)->name('note.destroy');
 
     // Wylogowanie użytkownika
     Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');

@@ -17,21 +17,18 @@
                 <h4>{{ Str::words($note->content, 30) }}</h4>
             </div>
             <div class="buttons">
-                <a href="{{ route('note.show', $note) }}">
+                <a href="{{ route('note.show', $note) }}" wire:loading.attr="disabled">
                     <img src="{{ Storage::url('public/imgs/eye-outline.svg') }}" alt="View Note" class="img">
                 </a>
 
-                <a href="{{ route('note.edit', $note) }}">
+                <a  href="{{ route('note.edit', $note) }}" wire:loading.attr="disabled">
                     <img src="{{ Storage::url('public/imgs/file-edit-outline.svg') }}" alt="Edit Note" class="img">
                 </a>
 
-                <form action="{{ route('note.destroy', $note) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn-submit">
-                        <img src="{{ Storage::url('public/imgs/trash-can-outline.svg') }}" alt="Delete Note" class="img">
-                    </button>
-                </form>
+                <a href="{{ route('note.destroy', $note) }}" wire:loading.attr="disabled" class="btn-submit">
+                    <img src="{{ Storage::url('public/imgs/trash-can-outline.svg') }}" alt="Delete Note" class="img">
+                </a>
+
             </div>
         </div>
     @endforeach
