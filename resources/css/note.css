@@ -78,6 +78,9 @@
     border-radius: 8px;
     box-shadow: 5px 5px 10px 1px;
 }
+.alert-container{
+    height: 90px;
+}
 .alert{
     height: fit-content;
     width: fit-content;

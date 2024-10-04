@@ -1,9 +1,12 @@
-<div class="row note-container mt-5 p-3">
-
+<div class="row note-container mt-5">
     @if (session('message'))
-        <div class="alert alert-info m-3 text-center" role="alert">
-            {{ session('message') }}
-        </div>
+    <div class="row alert-container">
+
+            <div class="alert alert-info m-3 mb-5 text-center" role="alert">
+                {{ session('message') }}
+            </div>
+
+    </div>
     @endif
 
     @foreach ($notes as $note)

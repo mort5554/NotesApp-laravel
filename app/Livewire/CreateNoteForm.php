@@ -2,10 +2,14 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use App\Models\Note;
 use Illuminate\Support\Facades\Auth;
 
+#[Layout('layouts.noteLayout')]
+#[Title('Notes')]
 class CreateNoteForm extends Component
 {
     public $title;
