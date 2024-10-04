@@ -9,7 +9,7 @@ use App\Models\Note;
 use Illuminate\Support\Facades\Auth;
 
 #[Layout('layouts.noteLayout')]
-#[Title('Notes')]
+#[Title('Create Note')]
 class CreateNoteForm extends Component
 {
     public $title;

@@ -13,7 +13,7 @@
     </div>
 
     <form wire:submit='edit' method="POST" class="note mt-5 container">
-        <label for="title" class="mt-3">Wpisz tytuł notatki</label>
+        <label for="title" class="mt-3">Edytuj tytuł notatki</label>
         <input type="text" wire:model='title' id="title" class="mb-3" required>
         <textarea wire:model='content' rows="5" class="note-body" placeholder="Wpisz zawartość notatki tutaj" required></textarea>
         <div class="buttons py-3">

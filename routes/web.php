@@ -3,6 +3,7 @@
 use App\Http\Controllers\NoteController;
 use App\Livewire\Auth\LoginForm;
 use App\Livewire\Auth\RegisterForm;
+use App\Livewire\EditNoteForm;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\UserRegisterController;
@@ -46,6 +47,7 @@ Route::post('/email/verification-notification', [UserRegisterController::class, 
     ->middleware(['auth', 'throttle:6,1'])
     ->name('verification.send');
 
+
 // Trasy dostępne tylko dla zalogowanych i zweryfikowanych użytkowników
 Route::group(['middleware' => ['auth', 'verified']], function () {
 
@@ -58,7 +60,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('/note/{note}', ShowNoteForm::class)->name('note.show');
 
-    Route::get('note/create', CreateNoteForm::class, )->name('note.create');
+    Route::get('note/create', CreateNoteForm::class)->name('note.create');
+    Route::get('note/{note}/edit', EditNoteForm::class)->name('note.edit');
 
 
     // Wylogowanie użytkownika

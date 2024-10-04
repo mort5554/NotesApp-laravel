@@ -2,47 +2,53 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use App\Models\Note;
 
+#[Layout('layouts.noteLayout')]
+#[Title('Edit Note')]
 class EditNoteForm extends Component
 {
-    public $noteId;
+    public $noteId;  // Deklarujemy publiczną właściwość na ID notatki
     public $title;
     public $content;
+    public $note;
 
     protected $rules = [
         'title' => 'required|string|max:20|min:3',
         'content' => 'required|string|max:255|min:5',
     ];
 
-    public function mount($id)
+    // Usuwamy $id z parametrów metody mount
+    public function mount($note)
     {
-        // Znajdujemy notatkę na podstawie ID i przypisujemy wartości
-        $note = Note::find($id);
-        if ($note) {
-            $this->noteId = $note->id;
-            $this->title = $note->title;
-            $this->content = $note->content;
+        $this->noteId = $note;
+        $this->note = Note::find($this->noteId);
+        if ($this->note) {
+            $this->noteId = $this->note->id;
+            $this->title = $this->note->title;
+            $this->content = $this->note->content;
+        } else {
+            session()->flash('error', 'Notatka nie została znaleziona');
+            return redirect()->route('note.index');
         }
     }
 
     public function edit()
     {
-        // Walidacja danych
         $validatedData = $this->validate();
 
-        // Znajdź istniejącą notatkę na podstawie ID i zaktualizuj dane
-        $note = Note::find($this->noteId);
-        if ($note) {
-            $note->update($validatedData);
+        $this->note = Note::find($this->noteId);
 
-            // Resetujemy pola i wyświetlamy komunikat
-            session()->flash('message', 'Udało się edytować notatkę');
-            $this->reset(['title', 'content']);
+        if ($this->note) {
+            $this->note->update($validatedData);
 
-            // Przekierowanie do listy notatek
+            session()->flash('message', 'Notatka została pomyślnie edytowana');
             return redirect()->route('note.index');
+        } else {
+            session()->flash('error', 'Wystąpił błąd przy edytowaniu notatki');
         }
     }
 
@@ -51,3 +57,4 @@ class EditNoteForm extends Component
         return view('livewire.note.edit-note-form');
     }
 }
+
