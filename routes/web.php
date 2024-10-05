@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Livewire\ShowNoteForm;
 use App\Livewire\NoteList;
 use App\Livewire\CreateNoteForm;
+use App\Livewire\Auth\UserSettings;
 
 // Przekierowanie z głównej strony na login
 Route::redirect('/', '/login', 301);
@@ -72,7 +73,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
 
     // Ustawienia użytkownika
-    Route::get('/settings', [UserController::class, 'show'])->name('user.settings');
+    Route::get('/settings', UserSettings::class)->name('user.settings');
+    //Route::get('/settings', [UserController::class, 'show'])->name('user.settings');
 
 
     // Zmiana hasła i nazwy użytkownika

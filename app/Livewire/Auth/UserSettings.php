@@ -2,10 +2,14 @@
 
 namespace App\Livewire\Auth;
 
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+#[Layout('layouts.noteLayout')]
+#[Title('Settings')]
 class UserSettings extends Component
 {
     public $name;
@@ -61,7 +65,6 @@ class UserSettings extends Component
 
         return view('livewire.auth.user-settings', [
             'user' => $user, 'noteCount' => $noteCount
-        ])
-            ->layout('noteLayout');
+        ]);
     }
 }

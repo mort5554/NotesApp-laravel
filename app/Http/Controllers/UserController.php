@@ -18,13 +18,6 @@ class UserController extends Controller
         return redirect(route('login'));
     }
 
-    public function show(User $user){
-        $user = Auth::user();
-        $noteCount = $user->notes()->count();
-        return view('auth.settings');
-    }
-
-
     public function confirmDelete(){
         return view('auth.confirm-delete');
     }
