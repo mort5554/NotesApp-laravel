@@ -1,4 +1,4 @@
-@extends('layouts.noteLayout')
+@extends('layouts.notification')
 
 
 @section('document_title')

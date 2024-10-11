@@ -1,10 +1,9 @@
-@extends('layouts.layout')
+@extends('layouts.notification')
 
 
 @section('document_title')
     Zweryfikuj Email
 @endsection
-
 
 
 @section('content')
