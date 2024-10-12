@@ -12,13 +12,15 @@ use App\Livewire\ShowNoteForm;
 use App\Livewire\NoteList;
 use App\Livewire\CreateNoteForm;
 use App\Livewire\Auth\UserSettings;
+use App\Livewire\Auth\AdminPanel;
+use App\Http\Middleware\CheckRole;
 
 // Przekierowanie z głównej strony na login
 Route::redirect('/', '/login', 301);
 
 
 // Obsługa logowania
-Route::get('/login', LoginForm::class)->name('login');
+Route::get('/login', LoginForm::class)->middleware(CheckRole::class)->name('login');
 
 
 // Obsługa rejestracji
@@ -38,13 +40,10 @@ Route::post('/email/verification-notification', [UserRegisterController::class, 
 
 // Trasy dostępne tylko dla zalogowanych i zweryfikowanych użytkowników
 Route::group(['middleware' => ['auth', 'verified']], function () {
+    // Trasy dostępne tylko dla administratorów
+    Route::get('/admin', AdminPanel::class)->name('admin')->middleware(CheckRole::class);
 
-    // Trasy resource'owe do obsługi notatek
-    Route::resource('note', NoteController::class)->except('index');
-
-
-    // Trasa do tworzenia notatki za pomocą Livewire (przesłania standardową metodę create)
-    Route::get('note', NoteList::class)->name('note.index');
+    Route::get('note', NoteList::class)->name('note.index')->middleware(CheckRole::class);
 
     Route::get('/note/{note}', ShowNoteForm::class)->name('note.show');
 
@@ -57,16 +56,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Wylogowanie użytkownika
     Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
 
-
     // Ustawienia użytkownika
     Route::get('/settings', UserSettings::class)->name('user.settings');
-    //Route::get('/settings', [UserController::class, 'show'])->name('user.settings');
-
 
     // Zmiana hasła i nazwy użytkownika
     Route::post('/change-password', [UserController::class, 'changePassword'])->name('password.change');
     Route::post('/change-name', [UserController::class, 'changeName'])->name('name.change');
-
 
     // Potwierdzenie usunięcia konta
     Route::get('/confirm_delete', [UserController::class, 'confirmDelete'])->name('user.confirm');
