@@ -3,16 +3,12 @@
 namespace App\Livewire\Auth;
 
 use Livewire\Component;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\Auth\Events\Registered;
-use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
+use App\Models\User;
+use Str;
 
-#[Layout('layouts.layout')]
-#[Title('Register')]
 class RegisterForm extends Component
 {
     public $name;
@@ -23,13 +19,13 @@ class RegisterForm extends Component
     protected $rules = [
         'name' => 'required|string|max:255|min:3',
         'email' => 'required|string|email|max:255|unique:users',
-        'password' => 'required|confirmed|',
+        'password' => 'required|confirmed',
     ];
 
     public function register()
     {
         // Walidacja formularza
-        $validatedData = $this->validate();
+        $this->validate();
 
         // Tworzenie nowego użytkownika
         $user = User::create([
@@ -38,14 +34,25 @@ class RegisterForm extends Component
             'password' => Hash::make($this->password),
         ]);
 
-        // Wywołanie zdarzenia rejestracji (do weryfikacji e-mail)
-        event(new Registered($user));
-
-        // Automatyczne logowanie nowego użytkownika
+        // Automatyczne zalogowanie nowego użytkownika
         Auth::login($user);
 
-        // Przekierowanie do strony weryfikacji e-mail
-        return redirect()->route('verification.notice');
+        // Sprawdzanie, czy globalny token istnieje w cache, jeśli nie, wygeneruj nowy
+        $globalToken = Cache::get('global_session_token');
+        if (!$globalToken) {
+            // Generowanie nowego tokenu globalnego
+            $globalToken = Str::random(32);
+            Cache::put('global_session_token', $globalToken);  // Przechowywanie w cache
+        }
+
+        // Przypisanie nowego tokenu sesji dla zalogowanego użytkownika
+        $userToken = Str::random(32);  // Generowanie unikalnego tokenu dla sesji
+        session(['user_token' => $userToken]);
+
+        // Zapisanie unikalnego tokenu użytkownika w cache
+        Cache::put('user_session_token_' . $user->id, $userToken, now()->addDay());
+
+        return redirect()->route('verification.notice');  // Przekierowanie po rejestracji
     }
 
     public function render()
@@ -53,3 +60,4 @@ class RegisterForm extends Component
         return view('livewire.auth.register-form');
     }
 }
+

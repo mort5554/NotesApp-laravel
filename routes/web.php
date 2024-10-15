@@ -5,6 +5,7 @@ use App\Livewire\Auth\LoginForm;
 use App\Livewire\Auth\RegisterForm;
 use App\Livewire\DeleteNote;
 use App\Livewire\EditNoteForm;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserRegisterController;
 use App\Http\Controllers\UserController;
@@ -14,6 +15,7 @@ use App\Livewire\CreateNoteForm;
 use App\Livewire\Auth\UserSettings;
 use App\Livewire\Auth\AdminPanel;
 use App\Http\Middleware\CheckRole;
+use App\Http\Middleware\CheckUserSession;
 
 // Przekierowanie z głównej strony na login
 Route::redirect('/', '/login', 301);
@@ -25,6 +27,7 @@ Route::get('/login', LoginForm::class)->middleware(CheckRole::class)->name('logi
 
 // Obsługa rejestracji
 Route::get('/register', RegisterForm::class)->name('register');
+
 
 // Obsługa weryfikacji e-maila
 Route::get('/email/verify', [UserRegisterController::class, 'showVerify'])
@@ -39,19 +42,22 @@ Route::post('/email/verification-notification', [UserRegisterController::class, 
 
 
 // Trasy dostępne tylko dla zalogowanych i zweryfikowanych użytkowników
-Route::group(['middleware' => ['auth', 'verified']], function () {
+Route::group(['middleware' => ['auth', 'verified', CheckUserSession::class]], function () {
     // Trasy dostępne tylko dla administratorów
-    Route::get('/admin', AdminPanel::class)->name('admin')->middleware(CheckRole::class);
+    Route::get('/admin', AdminPanel::class)->name('admin')
+        ->middleware(CheckRole::class);
 
-    Route::get('note', NoteList::class)->name('note.index')->middleware(CheckRole::class);
+    //Trasy notatek
+    Route::get('note', NoteList::class)->name('note.index')
+        ->middleware(CheckRole::class);
 
     Route::get('/note/{note}', ShowNoteForm::class)->name('note.show');
 
-    Route::get('note/create', CreateNoteForm::class)->name('note.create');
+    Route::get('/note/create', CreateNoteForm::class)->name('note.create');
 
-    Route::get('note/{note}/edit', EditNoteForm::class)->name('note.edit');
+    Route::get('/note/{note}/edit', EditNoteForm::class)->name('note.edit');
 
-    Route::get('note/{note}/delete', DeleteNote::class)->name('note.destroy');
+    Route::get('/note/{note}/delete', DeleteNote::class)->name('note.destroy');
 
     // Wylogowanie użytkownika
     Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');

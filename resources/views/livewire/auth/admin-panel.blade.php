@@ -3,6 +3,14 @@
         <h1>Strona Administratora</h1>
         <a class="btn btn-danger text-decoration-none" href="{{ route('user.logout') }}">Wyloguj</a>
     </nav>
+
+    @if (session()->has('message'))
+        <div class="alert alert-success mt-3">
+            {{ session('message') }}
+        </div>
+    @endif
+
+
     <div class="left-side mt-5">
         <h1>Lista wszystkich użytkowników</h1>
         <div class="flex justify-between items-center">
@@ -18,12 +26,13 @@
         </div>
         <table class="table w-25 mt-4">
             <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nazwa</th>
-                <th scope="col">email</th>
-                <th scope="col">Ilość notatek</th>
-              </tr>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nazwa</th>
+                    <th scope="col">email</th>
+                    <th scope="col">Ilość notatek</th>
+                    <th scope="col">Wyloguj użytkownika</th>
+                </tr>
             </thead>
             <tbody>
                 @foreach ($users as $user)
@@ -32,6 +41,11 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->notes->count() }}</td>
+                        <td>
+                            <button wire:click='logoutUser({{ $user->id }})' class="btn btn-danger">
+                                Wyloguj
+                            </button>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -39,5 +53,6 @@
 
         {{ $users->links('vendor.pagination.custom') }}
 
+        <a wire:click='logoutAllUsers' class="btn btn-danger mt-5">Wyloguj wszystkich użytkowników</a>
     </div>
 </div>

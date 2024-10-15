@@ -6,9 +6,12 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Log;
+use Str;
 
 #[Layout('layouts.layout')]
-#[Title('Login')]
+#[Title('Logowanie')]
 class LoginForm extends Component
 {
     public $email;
@@ -26,11 +29,32 @@ class LoginForm extends Component
 
         // Próba zalogowania użytkownika
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
-            // Jeśli logowanie powiodło się, przekieruj na stronę domową (lub inną)
+            $user = Auth::user();
+
+            // Logowanie globalnego tokenu (sprawdzenie, czy istnieje)
+            $globalToken = Cache::get('global_session_token');
+            if (!$globalToken) {
+                $globalToken = Str::random(32);  // Generowanie nowego tokenu
+                Cache::put('global_session_token', $globalToken);  // Przechowywanie w cache
+            }
+
+            // Generowanie unikalnego tokenu dla sesji użytkownika
+            //$userToken = Str::random(32);
+            session(['user_token' => $globalToken]);
+
+            // Zapisanie tokenu użytkownika w cache z kluczem user_session_token_{id}
+            Cache::put('user_session_token_' . $user->id, $globalToken, now()->addDay());
+
+            // Logowanie dla debugowania
+            Log::info('Zalogowano użytkownika', [
+                'user_id' => $user->id,
+                'user_token' => $globalToken,
+                'cached_user_token' => Cache::get('user_session_token_' . $user->id)
+            ]);
+
             return redirect()->intended('/note');
         }
 
-        // Jeśli logowanie się nie powiodło, wyświetl komunikat o błędzie
         $this->addError('password', 'Nieprawidłowy email lub hasło.');
     }
 

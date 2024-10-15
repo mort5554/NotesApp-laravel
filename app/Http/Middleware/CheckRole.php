@@ -26,7 +26,7 @@ class CheckRole
             }
 
             // Jeśli użytkownik ma rolę "user" i nie jest na stronie notatek, przekieruj do listy notatek
-            if ($user->role == 'user' && !$request->is('note*')) {
+            if ($user->role == 'user' && !$request->is('note') && !$request->is('note/*')) {
                 return redirect()->route('note.index');
             }
         }
